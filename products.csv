@@ -59,7 +59,7 @@ id,name,category,price,manufacturer,image,shortDescription
 58,LM2596 Buck,Components,392,VELOCE,assets/products/lm2596_buck.png,LM2596 Buck for electronics and embedded projects.
 59,XL6009 Boost,Components,425,VELOCE,assets/products/xl6009_boost.png,XL6009 Boost for electronics and embedded projects.
 60,Breadboard,Components,458,VELOCE,assets/products/breadboard.png,Breadboard for electronics and embedded projects.
-61,18650 Cell,Batteries,490,VELOCE,assets/products/18650_cell.png,18650 Cell for electronics and embedded projects.
+61,18650 Cell,Batteries,490,VELOCE,assets/products/18650_battery.png,18650 Cell for electronics and embedded projects.
 62,LiPo Battery,Batteries,522,VELOCE,assets/products/lipo_battery.png,LiPo Battery for electronics and embedded projects.
 63,9V Battery,Batteries,555,VELOCE,assets/products/9v_battery.png,9V Battery for electronics and embedded projects.
 64,CR2032 Cell,Batteries,588,VELOCE,assets/products/cr2032_cell.png,CR2032 Cell for electronics and embedded projects.
