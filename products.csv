@@ -1,0 +1,69 @@
+id,name,category,price,manufacturer,image,shortDescription
+1,ESP32-WROOM-32D MCU,Microcontrollers,112,Espressif,assets/products/esp32_devkit.png,High-performance Wi-Fi + BT + BLE MCU module.
+2,Orange 2200mAh 3S 30C LiPo,Batteries,625,Orange Power,assets/products/lipo_battery.png,High-discharge lithium polymer battery for drones.
+3,NEMA 17 Stepper Motor,Motors,312,Generic High-Torque,assets/products/sg90_servo.png,Precision stepper motor for 3D printers and CNC.
+4,Creality Ender 3 V2 Board,3D Printing,1125,Creality,assets/products/arduino_mega.png,Silent 32-bit mainboard upgrade.
+5,MPU6050 6-Axis Gyro,Sensors,80,InvenSense,assets/products/mpu6050.png,Motion tracking sensor for stabilized systems.
+6,Ultrasonic HC-SR04,Sensors,38,Generic,assets/products/hc_sr04.png,Non-contact distance measurement module.
+7,Raspberry Pi 4 Model B (8GB),Microcontrollers,1875,Raspberry Pi Foundation,assets/products/raspberry_pi_4.png,Powerful credit-card sized computer.
+8,A2212 1000KV BLDC Motor,Motors,222,Generic Aero,assets/products/sg90_servo.png,Brushless DC motor for multirotors.
+9,ATmega328P-PU DIP MCU,Microcontrollers,70,Microchip (Atmel),assets/products/atmega328p.png,The classic Arduino Uno heart — standalone 8-bit AVR microcontroller.
+10,STM32F103C8T6 (Blue Pill MCU),Microcontrollers,49,STMicroelectronics,assets/products/stm32_blue_pill.png,"Popular ARM Cortex-M3 MCU, the brain of the Blue Pill board."
+11,RP2040 MCU Chip,Microcontrollers,30,Raspberry Pi,assets/products/pico_w.png,Dual-core Cortex-M0+ chip powering the Pi Pico. Great for PIO state machines.
+12,PIC16F877A DIP MCU,Microcontrollers,88,Microchip,assets/products/atmega328p.png,Workhorse 8-bit PIC MCU with built-in ADC and USART. DIP-40 package.
+13,NE555P Timer IC,ICs,9,Texas Instruments,assets/products/atmega328p.png,"The legendary 555 timer. Astable, monostable, bistable — does it all."
+14,LM741 Op-Amp IC,ICs,14,Texas Instruments,assets/products/atmega328p.png,Classic general-purpose single op-amp. Ideal for learning and prototyping.
+15,LM358 Dual Op-Amp IC,ICs,11,STMicroelectronics,assets/products/atmega328p.png,Low-power dual op-amp with single-supply operation down to 3V.
+16,74HC595 Shift Register IC,ICs,8,NXP Semiconductors,assets/products/atmega328p.png,"8-bit serial-in, parallel-out shift register. Expand GPIO with SPI."
+17,L293D Motor Driver IC,ICs,28,STMicroelectronics,assets/products/l298n_driver.png,Dual H-bridge motor driver IC. Drive 2 DC motors or 1 stepper.
+18,LM7805 Voltage Regulator,ICs,10,Fairchild / ON Semi,assets/products/lm2596_buck.png,Fixed +5V linear voltage regulator. Essential for 5V rail from unregulated supplies.
+19,AMS1117-3.3 LDO Regulator,ICs,6,Advanced Monolithic Systems,assets/products/lm2596_buck.png,Low-dropout 3.3V regulator. Popular for powering ESP8266/ESP32 from 5V.
+20,MAX232 RS-232 Transceiver IC,ICs,21,Maxim / Texas Instruments,assets/products/atmega328p.png,RS-232 level converter. Bridges TTL MCU UART to RS-232 PC serial ports.
+21,SN74HC00 Quad NAND Gate IC,ICs,6,Texas Instruments,assets/products/atmega328p.png,4× 2-input NAND gates. Build any logic function from first principles.
+22,CD4051 8-Channel Analog Mux IC,ICs,15,Texas Instruments,assets/products/atmega328p.png,Single 8-channel analog multiplexer/demultiplexer for signal routing.
+23,MCP2515 CAN Bus Controller,ICs,55,Microchip,assets/products/atmega328p.png,Stand-alone CAN 2.0B controller with SPI interface. Perfect for automotive / robotics.
+24,DS18B20 1-Wire Temp Sensor IC,Sensors,30,Maxim Integrated,assets/products/dht11.png,Digital 1-Wire temperature sensor. Accurate to ±0.5°C. TO-92 package.
+25,BME280 Temp/Humidity/Pressure Sensor,Sensors,95,Bosch Sensortec,assets/products/bmp280.png,All-in-one environmental sensor. I2C/SPI. Used in weather stations and drones.
+26,nRF24L01+ 2.4GHz RF Module,Wireless,38,Nordic Semiconductor,assets/products/nodemcu_esp8266.png,"Low-power 2.4GHz transceiver module. SPI interface, 1Mbps data rate. Great for RC."
+27,HC-05 Bluetooth Classic Module,Wireless,80,Generic (CSR BC417),assets/products/nodemcu_esp8266.png,Classic Bluetooth 2.0 UART module. Easy serial wireless bridge for MCU projects.
+28,CP2102 USB-UART Bridge IC,ICs,22,Silicon Labs,assets/products/atmega328p.png,USB to UART converter IC. Program MCUs and debug serial output via USB.
+29,ESP32 DevKit,Microcontrollers,100,VELOCE,assets/products/esp32_devkit.png,ESP32 DevKit for electronics and embedded projects.
+30,Raspberry Pi Pico,Microcontrollers,132,VELOCE,assets/products/raspberry_pi_pico.png,Raspberry Pi Pico for electronics and embedded projects.
+31,STM32 Blue Pill,Microcontrollers,165,VELOCE,assets/products/stm32_blue_pill.png,STM32 Blue Pill for electronics and embedded projects.
+32,Arduino Uno,Microcontrollers,198,VELOCE,assets/products/arduino_uno.png,Arduino Uno for electronics and embedded projects.
+33,NodeMCU ESP8266,Microcontrollers,230,VELOCE,assets/products/nodemcu_esp8266.png,NodeMCU ESP8266 for electronics and embedded projects.
+34,ESP32-CAM,Microcontrollers,262,VELOCE,assets/products/esp32_cam.png,ESP32-CAM for electronics and embedded projects.
+35,Teensy 4.1,Microcontrollers,295,VELOCE,assets/products/teensy_4.1.png,Teensy 4.1 for electronics and embedded projects.
+36,ATmega328P,Microcontrollers,328,VELOCE,assets/products/atmega328p.png,ATmega328P for electronics and embedded projects.
+37,MPU6050,Sensors,360,VELOCE,assets/products/mpu6050.png,MPU6050 for electronics and embedded projects.
+38,DHT11,Sensors,392,VELOCE,assets/products/dht11.png,DHT11 for electronics and embedded projects.
+39,HC-SR04,Sensors,425,VELOCE,assets/products/hc_sr04.png,HC-SR04 for electronics and embedded projects.
+40,BMP280,Sensors,458,VELOCE,assets/products/bmp280.png,BMP280 for electronics and embedded projects.
+41,PIR Sensor,Sensors,490,VELOCE,assets/products/pir_sensor.png,PIR Sensor for electronics and embedded projects.
+42,IR Sensor,Sensors,522,VELOCE,assets/products/ir_sensor.png,IR Sensor for electronics and embedded projects.
+43,MQ2 Gas Sensor,Sensors,555,VELOCE,assets/products/mq2_gas_sensor.png,MQ2 Gas Sensor for electronics and embedded projects.
+44,LDR Module,Sensors,588,VELOCE,assets/products/ldr_module.png,LDR Module for electronics and embedded projects.
+45,Arduino Nano,Development Boards,620,VELOCE,assets/products/arduino_nano.png,Arduino Nano for electronics and embedded projects.
+46,Raspberry Pi 4,Development Boards,652,VELOCE,assets/products/raspberry_pi_4.png,Raspberry Pi 4 for electronics and embedded projects.
+47,Jetson Nano,Development Boards,685,VELOCE,assets/products/jetson_nano.png,Jetson Nano for electronics and embedded projects.
+48,BeagleBone Black,Development Boards,718,VELOCE,assets/products/beaglebone_black.png,BeagleBone Black for electronics and embedded projects.
+49,ESP32-S3,Development Boards,100,VELOCE,assets/products/esp32_s3.png,ESP32-S3 for electronics and embedded projects.
+50,Arduino Mega,Development Boards,132,VELOCE,assets/products/arduino_mega.png,Arduino Mega for electronics and embedded projects.
+51,Pico W,Development Boards,165,VELOCE,assets/products/pico_w.png,Pico W for electronics and embedded projects.
+52,STM32 Nucleo,Development Boards,198,VELOCE,assets/products/stm32_nucleo.png,STM32 Nucleo for electronics and embedded projects.
+53,L298N Driver,Components,230,VELOCE,assets/products/l298n_driver.png,L298N Driver for electronics and embedded projects.
+54,Relay Module,Components,262,VELOCE,assets/products/relay_module.png,Relay Module for electronics and embedded projects.
+55,NeoPixel Ring,Components,295,VELOCE,assets/products/neopixel_ring.png,NeoPixel Ring for electronics and embedded projects.
+56,16x2 LCD,Components,328,VELOCE,assets/products/16x2_lcd.png,16x2 LCD for electronics and embedded projects.
+57,SG90 Servo,Components,360,VELOCE,assets/products/sg90_servo.png,SG90 Servo for electronics and embedded projects.
+58,LM2596 Buck,Components,392,VELOCE,assets/products/lm2596_buck.png,LM2596 Buck for electronics and embedded projects.
+59,XL6009 Boost,Components,425,VELOCE,assets/products/xl6009_boost.png,XL6009 Boost for electronics and embedded projects.
+60,Breadboard,Components,458,VELOCE,assets/products/breadboard.png,Breadboard for electronics and embedded projects.
+61,18650 Cell,Batteries,490,VELOCE,assets/products/18650_cell.png,18650 Cell for electronics and embedded projects.
+62,LiPo Battery,Batteries,522,VELOCE,assets/products/lipo_battery.png,LiPo Battery for electronics and embedded projects.
+63,9V Battery,Batteries,555,VELOCE,assets/products/9v_battery.png,9V Battery for electronics and embedded projects.
+64,CR2032 Cell,Batteries,588,VELOCE,assets/products/cr2032_cell.png,CR2032 Cell for electronics and embedded projects.
+65,AA Rechargeable,Batteries,620,VELOCE,assets/products/aa_rechargeable.png,AA Rechargeable for electronics and embedded projects.
+66,Battery Holder,Batteries,652,VELOCE,assets/products/battery_holder.png,Battery Holder for electronics and embedded projects.
+67,TP4056 Charger,Batteries,685,VELOCE,assets/products/tp4056_charger.png,TP4056 Charger for electronics and embedded projects.
+68,Power Module,Batteries,718,VELOCE,assets/products/power_module.png,Power Module for electronics and embedded projects.
