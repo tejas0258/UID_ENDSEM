@@ -542,7 +542,7 @@ const fallbackProducts = [
         "category": "Batteries",
         "price": 490,
         "manufacturer": "VELOCE",
-        "image": "assets/products/18650-battery.png",
+        "image": "assets/products/18650_battery.png",
         "shortDescription": "18650 Cell for electronics and embedded projects.",
         "specs": {
             "Voltage": "3.3V/5V",
