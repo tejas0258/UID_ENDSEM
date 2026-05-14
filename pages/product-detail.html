@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Specs | VELOCE</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            background: var(--bg-surface);
+            padding: 50px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        .detail-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+        .tabs {
+            margin-top: 60px;
+        }
+        .tab-headers {
+            display: flex;
+            gap: 40px;
+            border-bottom: 1px solid var(--border);
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 0.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding-bottom: 15px;
+            transition: var(--transition);
+        }
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        .tab-content {
+            padding: 40px 0;
+            color: var(--text-silver);
+        }
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .specs-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        .specs-table td {
+            padding: 15px 0;
+        }
+        .specs-label {
+            font-weight: 900;
+            width: 250px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 992px) {
+            .detail-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">VELOCE <span>LABS</span></a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="theme-switch"><label class="switch"><input type="checkbox" id="theme-toggle-input"><span class="slider"></span></label></div>
+                <a href="cart.html" class="cart-icon" style="position: relative; font-size: 1.2rem;">
+                    🛒 <span class="cart-count" style="position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; font-size: 0.65rem; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div id="product-detail-view">
+            <!-- Loaded via JS -->
+            <p style="text-align: center; padding: 100px; color: var(--text-muted);">Syncing with technical database...</p>
+        </div>
+    </main>
+
+    <footer style="margin-top: 100px;">
+        <div class="logo">VELOCE <span>LABS</span></div>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+    <script>
+        async function initDetail() {
+            const id = parseInt(getUrlParam('id'));
+            const data = await loadProducts('../');
+            const view = document.getElementById('product-detail-view');
+            
+            if (!data || data.length === 0) {
+                view.innerHTML = '<h2 style="text-align:center; padding: 100px;">DATABASE SYNC FAILED.</h2>';
+                return;
+            }
+
+            const product = data.find(p => p.id === id);
+
+            if (!product) {
+                view.innerHTML = '<h2 style="text-align:center; padding: 100px;">COMPONENT NOT FOUND IN GARAGE.</h2>';
+                return;
+            }
+
+            document.title = `${product.name} | VELOCE`;
+
+            view.innerHTML = `
+                <div class="detail-container">
+                    <div class="detail-img">
+                        <img src="${fixImagePath(product.image)}" alt="${product.name}">
+                    </div>
+                    <div class="detail-info">
+                        <span class="product-category">${product.category}</span>
+                        <h1 style="font-size: 3rem; font-weight: 900; margin: 10px 0; letter-spacing: -1px;">${product.name}</h1>
+                        <p style="color: var(--accent); font-weight: 800; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 20px;">By ${product.manufacturer}</p>
+                        <div class="product-price" style="font-size: 2.5rem;">${product.price.toFixed(0)}</div>
+                        <p style="margin: 30px 0; color: var(--text-silver); font-size: 1.1rem; line-height: 1.8;">${product.shortDescription}</p>
+                        <button class="btn btn-primary" style="padding: 18px 50px; font-size: 1rem;" onclick="addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="tabs">
+                    <div class="tab-headers">
+                        <button class="tab-btn active" onclick="switchTab(event, 'desc')">Overview</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'specs')">Technical Data</button>
+                        <button class="tab-btn" onclick="switchTab(event, 'dims')">Chassis & Weight</button>
+                    </div>
+                    <div id="tab-content" class="tab-content">
+                        <div id="desc-tab">
+                            <p style="font-size: 1.2rem; line-height: 2;">${product.description || product.shortDescription}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            window.currentProduct = product;
+        }
+
+        function switchTab(event, tab) {
+            const content = document.getElementById('tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const p = window.currentProduct;
+
+            switch(tab) {
+                case 'desc':
+                    content.innerHTML = `<p style="font-size: 1.2rem; line-height: 2;">${p.description || p.shortDescription || 'No detailed description available.'}</p>`;
+                    break;
+                case 'specs':
+                    let table = '<table class="specs-table">';
+                    if (p.specs && Object.keys(p.specs).length > 0) {
+                        for (let [key, val] of Object.entries(p.specs)) {
+                            table += `<tr><td class="specs-label">${key}</td><td>${val}</td></tr>`;
+                        }
+                    } else {
+                        table += '<tr><td colspan="2" style="text-align:center; padding: 40px; color: var(--text-muted);">TECHNICAL DATA NOT INITIALIZED</td></tr>';
+                    }
+                    table += '</table>';
+                    content.innerHTML = table;
+                    break;
+                case 'dims':
+                    content.innerHTML = `
+                        <table class="specs-table">
+                            <tr><td class="specs-label">Dimensions</td><td>${p.dimensions || 'NOT SPECIFIED'}</td></tr>
+                            <tr><td class="specs-label">Mass</td><td>${p.weight || 'NOT SPECIFIED'}</td></tr>
+                        </table>
+                    `;
+                    break;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initDetail);
+    </script>
+</body>
+</html>

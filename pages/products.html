@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Shop | VELOCE</title>
+    <meta name="description" content="Browse our curated collection of industrial electronics, motors, and precision sensors. Engineered for performance and reliability.">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">VELOCE <span>LABS</span></a>
+            
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <div class="theme-switch">
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle-input">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <a href="cart.html" class="cart-icon" style="position: relative; font-size: 1.2rem;">
+                    🛒 <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div style="display: flex; gap: 40px; margin-top: 40px; align-items: flex-start;">
+            <!-- Technical Filters -->
+            <aside style="width: 280px; background: var(--bg-surface); padding: 35px; border-radius: 24px; border: 1px solid var(--border); position: sticky; top: 120px;">
+                <h3 style="font-weight: 900; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;">Categories</h3>
+                <div>
+                    <ul id="category-filters" style="display: flex; flex-direction: column; gap: 12px;">
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="all" checked style="accent-color: var(--accent);"> All Products</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Microcontrollers" style="accent-color: var(--accent);"> Microcontrollers</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Batteries" style="accent-color: var(--accent);"> Batteries</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Motors" style="accent-color: var(--accent);"> Motors</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="3D Printing" style="accent-color: var(--accent);"> 3D Printing</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Sensors" style="accent-color: var(--accent);"> Sensors</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="ICs" style="accent-color: var(--accent);"> ICs</label></li>
+                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Wireless" style="accent-color: var(--accent);"> Wireless</label></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Manifest Grid -->
+            <div style="flex-grow: 1;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+                    <h2 id="page-title" style="font-size: 2.5rem; font-weight: 900; letter-spacing: -2px; text-transform: uppercase;">PRODUCT <span style="color: var(--accent);">SHOP</span></h2>
+                    <span id="item-count" style="color: var(--text-muted); font-weight: 700; font-size: 0.9rem;">Loading...</span>
+                </div>
+                
+                <div id="product-list" class="product-grid">
+                    <!-- Loaded via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="margin-top: 120px;">
+        <div class="logo">VELOCE <span>LABS</span></div>
+        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+    <script>
+        async function displayProducts(filter = 'all') {
+            const data = await loadProducts('../');
+            const productList = document.getElementById('product-list');
+            const itemCount = document.getElementById('item-count');
+            
+            if (!data || data.length === 0) {
+                productList.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 40px;">No components found in manifest.</p>';
+                itemCount.textContent = '0 ITEMS FOUND';
+                return;
+            }
+
+            productList.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? data 
+                : data.filter(p => p.category === filter);
+
+            itemCount.textContent = `${filtered.length} ITEMS FOUND`;
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <a href="product-detail.html?id=${product.id}">
+                        <img src="${fixImagePath(product.image)}" alt="${product.name}">
+                    </a>
+                    <div class="product-info">
+                        <span class="product-category">${product.category}</span>
+                        <a href="product-detail.html?id=${product.id}" style="display: block; font-size: 1.3rem; font-weight: 900; margin-bottom: 10px;">${product.name}</a>
+                        <div class="product-price">${product.price.toFixed(0)}</div>
+                        <button class="btn btn-primary" onclick="addToCart(${product.id})" style="width: 100%;">Add to Cart</button>
+                    </div>
+                `;
+                productList.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const cat = getUrlParam('cat') || 'all';
+            
+            // Set checkbox state based on URL
+            const checkboxes = document.querySelectorAll('#category-filters input');
+            checkboxes.forEach(cb => {
+                if(cb.value === cat) cb.checked = true;
+                else if (cat !== 'all') cb.checked = false;
+            });
+
+            displayProducts(cat);
+
+            // Handle filter changes
+            checkboxes.forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        checkboxes.forEach(other => { if(other !== e.target) other.checked = false; });
+                        displayProducts(e.target.value);
+                    } else {
+                        // If unchecking, default to all
+                        const allCb = document.querySelector('input[value="all"]');
+                        allCb.checked = true;
+                        displayProducts('all');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+l>
