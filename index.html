@@ -10,7 +10,7 @@
     <header>
         <nav>
             <a href="index.html" class="logo">VELOCE <span>LABS</span></a>
-            
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="pages/products.html">Shop</a></li>
@@ -24,8 +24,8 @@
                         <span class="slider"></span>
                     </label>
                 </div>
-                
-                <a href="pages/cart.html" class="cart-icon">
+
+                <a href="pages/cart.html" class="cart-icon" aria-label="Open cart">
                     🛒 <span class="cart-count">0</span>
                 </a>
             </div>
@@ -38,9 +38,11 @@
                 <h1>
                     PRECISION <span>COMPONENTS.</span>
                 </h1>
+
                 <p>
                     Industrial-grade electronics, high-torque motors, and premium power systems for professional engineers.
                 </p>
+
                 <div class="hero-buttons">
                     <a href="pages/products.html" class="btn btn-primary">Start Shopping</a>
                     <a href="pages/products.html?cat=Motors" class="btn btn-outline">Explore Motors</a>
@@ -84,23 +86,24 @@
             </div>
         </section>
 
-        <!-- Trending Grids -->
+        <!-- Best Sellers -->
         <section>
             <div class="section-header">
                 <h2 class="section-title-no-margin">
                     Best <span class="accent-text">Sellers</span>
                 </h2>
+
                 <a href="pages/products.html" class="view-all-link">View All Products →</a>
             </div>
 
             <div id="featured-products" class="product-grid">
-                <!-- Data loaded via JS -->
+                <!-- Products loaded from js/app.js -->
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="logo">VELOCE <span>LABS</span></div>
+        <div class="logo footer-logo">VELOCE <span>LABS</span></div>
 
         <div class="footer-links">
             <a href="#">Support</a>
@@ -115,58 +118,5 @@
     </footer>
 
     <script src="js/app.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const featuredGrid = document.getElementById('featured-products');
-
-            featuredGrid.innerHTML = `
-                <div class="loading-state">
-                    SYNCING INVENTORY...
-                </div>
-            `;
-            
-            const data = await loadProducts('./');
-            
-            if (!data || data.length === 0) {
-                featuredGrid.innerHTML = `
-                    <p class="empty-state">
-                        No products found. Please check products.json.
-                    </p>
-                `;
-                return;
-            }
-
-            featuredGrid.innerHTML = '';
-
-            data.slice(0, 4).forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-
-                card.innerHTML = `
-                    <a href="pages/product-detail.html?id=${product.id}">
-                        <img src="${fixImagePath(product.image)}" alt="${product.name}">
-                    </a>
-
-                    <div class="product-info">
-                        <span class="product-category">${product.category}</span>
-
-                        <a href="pages/product-detail.html?id=${product.id}" class="product-title-link">
-                            ${product.name}
-                        </a>
-
-                        <div class="product-price">
-                            ${product.price.toFixed(0)}
-                        </div>
-
-                        <button class="btn btn-primary add-cart-btn" onclick="addToCart(${product.id})">
-                            Add to Cart
-                        </button>
-                    </div>
-                `;
-
-                featuredGrid.appendChild(card);
-            });
-        });
-    </script>
 </body>
 </html>
