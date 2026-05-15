@@ -25,23 +25,23 @@
                     </label>
                 </div>
                 
-                <a href="pages/cart.html" class="cart-icon" style="position: relative; font-size: 1.2rem;">
-                    🛒 <span class="cart-count" style="position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; font-size: 0.65rem; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">0</span>
+                <a href="pages/cart.html" class="cart-icon">
+                    🛒 <span class="cart-count">0</span>
                 </a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero" style="background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center;">
+        <section class="hero">
             <div class="hero-content">
-                <h1 style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+                <h1>
                     PRECISION <span>COMPONENTS.</span>
                 </h1>
-                <p style="color: var(--text-silver); font-size: 1.2rem; margin-bottom: 40px; max-width: 500px; font-weight: 500;">
+                <p>
                     Industrial-grade electronics, high-torque motors, and premium power systems for professional engineers.
                 </p>
-                <div style="display: flex; gap: 20px;">
+                <div class="hero-buttons">
                     <a href="pages/products.html" class="btn btn-primary">Start Shopping</a>
                     <a href="pages/products.html?cat=Motors" class="btn btn-outline">Explore Motors</a>
                 </div>
@@ -49,40 +49,50 @@
         </section>
 
         <!-- Featured Categories -->
-        <section style="margin-bottom: 80px;">
-            <h2 style="font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 40px; text-transform: uppercase;">
-                Shop By <span style="color: var(--accent);">Category</span>
+        <section class="featured-categories">
+            <h2 class="section-title">
+                Shop By <span class="accent-text">Category</span>
             </h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-                <div class="product-card" style="padding: 30px; text-align: left; background: linear-gradient(135deg, #161616 0%, #0b0b0b 100%);">
-                    <span style="font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">POWER</span>
-                    <h3 style="font-size: 1.5rem; margin: 10px 0;">Batteries & Chargers</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 25px;">LiPo packs, BMS, and high-speed balancing chargers.</p>
-                    <a href="pages/products.html?cat=Batteries" class="btn btn-outline" style="width: fit-content; padding: 8px 20px;">Browse</a>
+
+            <div class="category-grid">
+                <div class="product-card category-card">
+                    <span class="category-label">POWER</span>
+                    <h3 class="category-title">Batteries & Chargers</h3>
+                    <p class="category-description">
+                        LiPo packs, BMS, and high-speed balancing chargers.
+                    </p>
+                    <a href="pages/products.html?cat=Batteries" class="btn btn-outline btn-small">Browse</a>
                 </div>
-                <div class="product-card" style="padding: 30px; text-align: left; background: linear-gradient(135deg, #161616 0%, #0b0b0b 100%);">
-                    <span style="font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">DRIVE</span>
-                    <h3 style="font-size: 1.5rem; margin: 10px 0;">Motors & Escs</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 25px;">Brushless motors, steppers, and precision drivers.</p>
-                    <a href="pages/products.html?cat=Motors" class="btn btn-outline" style="width: fit-content; padding: 8px 20px;">Browse</a>
+
+                <div class="product-card category-card">
+                    <span class="category-label">DRIVE</span>
+                    <h3 class="category-title">Motors & Escs</h3>
+                    <p class="category-description">
+                        Brushless motors, steppers, and precision drivers.
+                    </p>
+                    <a href="pages/products.html?cat=Motors" class="btn btn-outline btn-small">Browse</a>
                 </div>
-                <div class="product-card" style="padding: 30px; text-align: left; background: linear-gradient(135deg, #161616 0%, #0b0b0b 100%);">
-                    <span style="font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">FABRICATION</span>
-                    <h3 style="font-size: 1.5rem; margin: 10px 0;">3D Printer Parts</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 25px;">Extruders, silent boards, and precision filaments.</p>
-                    <a href="pages/products.html?cat=3D Printing" class="btn btn-outline" style="width: fit-content; padding: 8px 20px;">Browse</a>
+
+                <div class="product-card category-card">
+                    <span class="category-label">FABRICATION</span>
+                    <h3 class="category-title">3D Printer Parts</h3>
+                    <p class="category-description">
+                        Extruders, silent boards, and precision filaments.
+                    </p>
+                    <a href="pages/products.html?cat=3D Printing" class="btn btn-outline btn-small">Browse</a>
                 </div>
             </div>
         </section>
 
         <!-- Trending Grids -->
         <section>
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
-                <h2 style="font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">
-                    Best <span style="color: var(--accent);">Sellers</span>
+            <div class="section-header">
+                <h2 class="section-title-no-margin">
+                    Best <span class="accent-text">Sellers</span>
                 </h2>
-                <a href="pages/products.html" style="color: var(--accent); font-weight: 700; font-size: 0.9rem;">View All Products →</a>
+                <a href="pages/products.html" class="view-all-link">View All Products →</a>
             </div>
+
             <div id="featured-products" class="product-grid">
                 <!-- Data loaded via JS -->
             </div>
@@ -91,43 +101,69 @@
 
     <footer>
         <div class="logo">VELOCE <span>LABS</span></div>
+
         <div class="footer-links">
             <a href="#">Support</a>
             <a href="#">Datasheets</a>
             <a href="#">Shipping</a>
             <a href="#">Privacy</a>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+
+        <p class="footer-copy">
+            &copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.
+        </p>
     </footer>
 
     <script src="js/app.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const featuredGrid = document.getElementById('featured-products');
-            featuredGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); font-weight: 900; letter-spacing: 2px;">SYNCING INVENTORY...</div>';
+
+            featuredGrid.innerHTML = `
+                <div class="loading-state">
+                    SYNCING INVENTORY...
+                </div>
+            `;
             
             const data = await loadProducts('./');
             
             if (!data || data.length === 0) {
-                featuredGrid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 40px;">No products found. Please check products.json.</p>';
+                featuredGrid.innerHTML = `
+                    <p class="empty-state">
+                        No products found. Please check products.json.
+                    </p>
+                `;
                 return;
             }
 
-            featuredGrid.innerHTML = ''; // Clear loading state
+            featuredGrid.innerHTML = '';
+
             data.slice(0, 4).forEach(product => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
+
                 card.innerHTML = `
                     <a href="pages/product-detail.html?id=${product.id}">
                         <img src="${fixImagePath(product.image)}" alt="${product.name}">
                     </a>
+
                     <div class="product-info">
                         <span class="product-category">${product.category}</span>
-                        <a href="pages/product-detail.html?id=${product.id}" style="display: block; font-size: 1.3rem; font-weight: 900; margin-bottom: 10px;">${product.name}</a>
-                        <div class="product-price">${product.price.toFixed(0)}</div>
-                        <button class="btn btn-primary" onclick="addToCart(${product.id})" style="width: 100%;">Add to Cart</button>
+
+                        <a href="pages/product-detail.html?id=${product.id}" class="product-title-link">
+                            ${product.name}
+                        </a>
+
+                        <div class="product-price">
+                            ${product.price.toFixed(0)}
+                        </div>
+
+                        <button class="btn btn-primary add-cart-btn" onclick="addToCart(${product.id})">
+                            Add to Cart
+                        </button>
                     </div>
                 `;
+
                 featuredGrid.appendChild(card);
             });
         });
