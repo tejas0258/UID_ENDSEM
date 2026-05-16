@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Shop | VELOCE</title>
     <meta name="description" content="Browse our curated collection of industrial electronics, motors, and precision sensors. Engineered for performance and reliability.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
+<body data-page="products" data-products-base="../">
     <header>
         <nav>
             <a href="../index.html" class="logo">VELOCE <span>LABS</span></a>
-            
+
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="products.html">Shop</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="login.html" data-auth-link>Login</a></li>
+                <li><a href="profile.html" data-profile-link>Profile</a></li>
             </ul>
 
             <div class="nav-controls">
@@ -25,8 +30,8 @@
                         <span class="slider"></span>
                     </label>
                 </div>
-                
-                <a href="cart.html" class="cart-icon" style="position: relative; font-size: 1.2rem;">
+
+                <a href="cart.html" class="cart-icon">
                     🛒 <span class="cart-count">0</span>
                 </a>
             </div>
@@ -34,110 +39,57 @@
     </header>
 
     <main>
-        <div style="display: flex; gap: 40px; margin-top: 40px; align-items: flex-start;">
-            <!-- Technical Filters -->
-            <aside style="width: 280px; background: var(--bg-surface); padding: 35px; border-radius: 24px; border: 1px solid var(--border); position: sticky; top: 120px;">
-                <h3 style="font-weight: 900; margin-bottom: 25px; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;">Categories</h3>
-                <div>
-                    <ul id="category-filters" style="display: flex; flex-direction: column; gap: 12px;">
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="all" checked style="accent-color: var(--accent);"> All Products</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Microcontrollers" style="accent-color: var(--accent);"> Microcontrollers</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Batteries" style="accent-color: var(--accent);"> Batteries</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Motors" style="accent-color: var(--accent);"> Motors</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="3D Printing" style="accent-color: var(--accent);"> 3D Printing</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Sensors" style="accent-color: var(--accent);"> Sensors</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="ICs" style="accent-color: var(--accent);"> ICs</label></li>
-                        <li><label style="cursor: pointer; display: flex; align-items: center; gap: 12px; font-weight: 500;"><input type="radio" name="category" value="Wireless" style="accent-color: var(--accent);"> Wireless</label></li>
-                    </ul>
-                </div>
-            </aside>
-
-            <!-- Manifest Grid -->
-            <div style="flex-grow: 1;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
-                    <h2 id="page-title" style="font-size: 2.5rem; font-weight: 900; letter-spacing: -2px; text-transform: uppercase;">PRODUCT <span style="color: var(--accent);">SHOP</span></h2>
-                    <span id="item-count" style="color: var(--text-muted); font-weight: 700; font-size: 0.9rem;">Loading...</span>
-                </div>
-                
-                <div id="product-list" class="product-grid">
-                    <!-- Loaded via JS -->
+        <section class="max-w-6xl mx-auto px-6 pt-10" data-aos="fade-up">
+            <div class="rounded-3xl border border-blue-500/20 bg-gradient-to-r from-blue-600/20 via-white/5 to-transparent p-6 shadow-xl shadow-blue-900/20">
+                <p class="text-xs font-bold uppercase tracking-[0.35em] text-blue-400">Tailwind Product Console</p>
+                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="rounded-2xl bg-black/30 p-4 border border-white/10">
+                        <p class="text-2xl font-black text-white">40+</p>
+                        <p class="text-sm text-slate-400">curated electronics</p>
+                    </div>
+                    <div class="rounded-2xl bg-black/30 p-4 border border-white/10">
+                        <p class="text-2xl font-black text-white">5</p>
+                        <p class="text-sm text-slate-400">smart categories</p>
+                    </div>
+                    <div class="rounded-2xl bg-black/30 p-4 border border-white/10">
+                        <p class="text-2xl font-black text-white">Fast</p>
+                        <p class="text-sm text-slate-400">cart + detail navigation</p>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <div class="shop-layout" data-aos="fade-up" data-aos-delay="150">
+            <aside class="filter-sidebar" data-aos="fade-right">
+                <h3>Categories</h3>
+                <ul id="category-filters" class="filter-list">
+                    <li><label class="filter-label"><input type="radio" name="category" value="all" checked> All Products</label></li>
+                    <li><label class="filter-label"><input type="radio" name="category" value="Microcontrollers"> Microcontrollers</label></li>
+                    <li><label class="filter-label"><input type="radio" name="category" value="Development Boards"> Development Boards</label></li>
+                    <li><label class="filter-label"><input type="radio" name="category" value="Sensors"> Sensors</label></li>
+                    <li><label class="filter-label"><input type="radio" name="category" value="Components"> Components</label></li>
+                    <li><label class="filter-label"><input type="radio" name="category" value="Batteries"> Batteries</label></li>
+                </ul>
+            </aside>
+
+            <section class="shop-main" data-aos="fade-left">
+                <div class="shop-header">
+                    <h2 id="page-title" class="page-title">PRODUCT <span>SHOP</span></h2>
+                    <span id="item-count" class="item-count">Loading...</span>
+                </div>
+
+                <div id="product-list" class="product-grid" data-aos="fade-up">
+                    <!-- Loaded by js/app.js -->
+                </div>
+            </section>
         </div>
     </main>
 
-    <footer style="margin-top: 120px;">
+    <footer class="footer-large">
         <div class="logo">VELOCE <span>LABS</span></div>
-        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+        <p class="footer-copy">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
     </footer>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/app.js"></script>
-    <script>
-        async function displayProducts(filter = 'all') {
-            const data = await loadProducts('../');
-            const productList = document.getElementById('product-list');
-            const itemCount = document.getElementById('item-count');
-            
-            if (!data || data.length === 0) {
-                productList.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 40px;">No components found in manifest.</p>';
-                itemCount.textContent = '0 ITEMS FOUND';
-                return;
-            }
-
-            productList.innerHTML = '';
-
-            const filtered = filter === 'all' 
-                ? data 
-                : data.filter(p => p.category === filter);
-
-            itemCount.textContent = `${filtered.length} ITEMS FOUND`;
-
-            filtered.forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <a href="product-detail.html?id=${product.id}">
-                        <img src="${fixImagePath(product.image)}" alt="${product.name}">
-                    </a>
-                    <div class="product-info">
-                        <span class="product-category">${product.category}</span>
-                        <a href="product-detail.html?id=${product.id}" style="display: block; font-size: 1.3rem; font-weight: 900; margin-bottom: 10px;">${product.name}</a>
-                        <div class="product-price">${product.price.toFixed(0)}</div>
-                        <button class="btn btn-primary" onclick="addToCart(${product.id})" style="width: 100%;">Add to Cart</button>
-                    </div>
-                `;
-                productList.appendChild(card);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            const cat = getUrlParam('cat') || 'all';
-            
-            // Set checkbox state based on URL
-            const checkboxes = document.querySelectorAll('#category-filters input');
-            checkboxes.forEach(cb => {
-                if(cb.value === cat) cb.checked = true;
-                else if (cat !== 'all') cb.checked = false;
-            });
-
-            displayProducts(cat);
-
-            // Handle filter changes
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', (e) => {
-                    if (e.target.checked) {
-                        checkboxes.forEach(other => { if(other !== e.target) other.checked = false; });
-                        displayProducts(e.target.value);
-                    } else {
-                        // If unchecking, default to all
-                        const allCb = document.querySelector('input[value="all"]');
-                        allCb.checked = true;
-                        displayProducts('all');
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
-l>

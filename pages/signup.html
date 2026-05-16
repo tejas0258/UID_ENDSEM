@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Access Terminal | VELOCE</title>
-    <meta name="description" content="Secure access to the VELOCE Labs operator profile and technical dashboards.">
+    <title>Create Account | VELOCE</title>
+    <meta name="description" content="Create a VELOCE Labs local demo account for the operator dashboard.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body data-page="login" data-products-base="../">
+<body data-page="signup" data-products-base="../">
     <header>
         <nav>
             <a href="../index.html" class="logo">VELOCE <span>LABS</span></a>
@@ -37,38 +37,46 @@
 
     <main>
         <div class="login-box" data-aos="zoom-in">
-            <h2 class="login-title">USER <span>LOGIN</span></h2>
-            <form id="login-form" novalidate>
+            <h2 class="login-title">USER <span>SIGNUP</span></h2>
+            <form id="signup-form" novalidate>
                 <div class="form-group">
-                    <label for="login-email">Identity (Email)</label>
-                    <input id="login-email" name="email" type="email" placeholder="OPERATOR@VELOCE.SYSTEMS" autocomplete="email" required>
+                    <label for="signup-name">Full Name</label>
+                    <input id="signup-name" name="name" type="text" placeholder="PROJECT BUILDER" autocomplete="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="login-password">Key (Password)</label>
-                    <input id="login-password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required>
+                    <label for="signup-email">Email</label>
+                    <input id="signup-email" name="email" type="email" placeholder="BUILDER@VELOCE.SYSTEMS" autocomplete="email" required>
                 </div>
-                <p id="login-message" class="auth-message" aria-live="polite"></p>
-                <button type="submit" class="btn btn-primary login-submit">Authenticate</button>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input id="signup-password" name="password" type="password" placeholder="Minimum 4 characters" autocomplete="new-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input id="signup-confirm" name="confirm" type="password" placeholder="Repeat password" autocomplete="new-password" required>
+                </div>
+                <p id="signup-message" class="auth-message" aria-live="polite"></p>
+                <button type="submit" class="btn btn-primary login-submit">Create Account</button>
             </form>
             <p class="login-helper">
-                Demo account: builder@veloce.systems / 1234.<br>
-                New user? <a href="signup.html">Create an account</a> or <a href="#" data-fill-demo-login>fill demo login.</a>
+                Already have an account? <a href="login.html">Login here</a>.<br>
+                Accounts are saved locally for this frontend project demo.
             </p>
         </div>
 
         <section class="max-w-5xl mx-auto px-6 pb-12" data-aos="fade-up" data-aos-delay="150">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="rounded-2xl border border-blue-500/20 bg-white/5 p-5">
-                    <p class="text-xs uppercase tracking-[0.3em] text-blue-400 font-bold">Profile</p>
-                    <p class="mt-2 text-white font-black">Save operator access</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-blue-400 font-bold">Step 1</p>
+                    <p class="mt-2 text-white font-black">Create local account</p>
                 </div>
                 <div class="rounded-2xl border border-blue-500/20 bg-white/5 p-5">
-                    <p class="text-xs uppercase tracking-[0.3em] text-blue-400 font-bold">Dashboard</p>
-                    <p class="mt-2 text-white font-black">View project status</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-blue-400 font-bold">Step 2</p>
+                    <p class="mt-2 text-white font-black">Redirect to profile</p>
                 </div>
                 <div class="rounded-2xl border border-blue-500/20 bg-white/5 p-5">
-                    <p class="text-xs uppercase tracking-[0.3em] text-blue-400 font-bold">Secure</p>
-                    <p class="mt-2 text-white font-black">Local test login</p>
+                    <p class="text-xs uppercase tracking-[0.3em] text-blue-400 font-bold">Step 3</p>
+                    <p class="mt-2 text-white font-black">Use dashboard</p>
                 </div>
             </div>
         </section>
