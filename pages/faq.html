@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | VELOCE</title>
+    <meta name="description" content="Frequently asked questions about VELOCE Labs products, cart, login, signup, and project workflow.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="faq" data-products-base="../">
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">VELOCE <span>LABS</span></a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="login.html" data-auth-link>Login</a></li>
+                <li><a href="profile.html" data-profile-link>Profile</a></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="theme-switch">
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle-input">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <a href="cart.html" class="cart-icon">
+                    🛒 <span class="cart-count">0</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="max-w-6xl mx-auto px-6 py-16" data-aos="fade-up">
+            <div class="rounded-[2rem] border border-blue-500/20 bg-gradient-to-br from-blue-700/20 via-white/5 to-black p-8 shadow-2xl shadow-blue-900/30">
+                <p class="text-xs font-bold uppercase tracking-[0.35em] text-blue-400">Support Console</p>
+                <h1 class="mt-4 text-4xl md:text-6xl font-black text-white tracking-tight">Frequently Asked <span class="text-blue-500">Questions</span></h1>
+                <p class="mt-5 max-w-3xl text-slate-400 leading-7">Quick answers for shopping, cart storage, signup, login, product details, and project testing.</p>
+            </div>
+        </section>
+
+        <section class="max-w-5xl mx-auto px-6 pb-20">
+            <div class="grid gap-5">
+                <details class="faq-card" data-aos="fade-up" open>
+                    <summary>What products are available on VELOCE Labs?</summary>
+                    <p>VELOCE Labs lists robotics and electronics components like microcontrollers, development boards, sensors, batteries, chargers, drivers, and project modules.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="50">
+                    <summary>How do I add a product to the cart?</summary>
+                    <p>Open the shop page, choose a product, and press the Add to Cart button. The cart icon updates automatically and the cart page displays the selected items.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="100">
+                    <summary>Will my cart stay after refreshing the page?</summary>
+                    <p>Yes. The cart uses browser storage with fallback support, so items should stay visible during normal project testing and page refreshes.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="150">
+                    <summary>Is the signup page connected to a real database?</summary>
+                    <p>No. This is a frontend project demo. Signup details are saved in the browser using local storage so login, logout, and profile features can work without a backend.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="200">
+                    <summary>How do login and signup work?</summary>
+                    <p>Create an account from the signup page, then login with the same email and password. After login, the profile page shows your saved user identity.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="250">
+                    <summary>How can I view product details?</summary>
+                    <p>Click a product image or product name from the shop. The detail page shows the product overview, technical data, dimensions, and an Add to Cart button.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="300">
+                    <summary>Which framework or libraries are used?</summary>
+                    <p>The project uses Tailwind CDN for visible UI blocks and AOS for scroll animations. Custom styling remains in css/style.css, and page logic remains in js/app.js.</p>
+                </details>
+                <details class="faq-card" data-aos="fade-up" data-aos-delay="350">
+                    <summary>Can this become a real ecommerce website?</summary>
+                    <p>Yes. The current version is frontend-only. A real version would need backend authentication, a product database, server-side cart storage, and payment integration.</p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logo">VELOCE <span>LABS</span></div>
+        <p class="footer-copy">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>
