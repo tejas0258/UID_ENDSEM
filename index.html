@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VELOCE | Luxury Electronics Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="home" data-products-base="./">
     <header>
         <nav>
             <a href="index.html" class="logo">VELOCE <span>LABS</span></a>
-            
+
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="pages/products.html">Shop</a></li>
-                <li><a href="pages/login.html">Login</a></li>
+                <li><a href="pages/about.html">About Us</a></li>
+                <li><a href="pages/login.html" data-auth-link>Login</a></li>
+                <li><a href="pages/profile.html" data-profile-link>Profile</a></li>
             </ul>
 
             <div class="nav-controls">
@@ -24,70 +28,98 @@
                         <span class="slider"></span>
                     </label>
                 </div>
-                
-                <a href="pages/cart.html" class="cart-icon" style="position: relative; font-size: 1.2rem;">
-                    🛒 <span class="cart-count" style="position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; font-size: 0.65rem; min-width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">0</span>
+
+                <a href="pages/cart.html" class="cart-icon">
+                    🛒 <span class="cart-count">0</span>
                 </a>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="hero" style="background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1600'); background-size: cover; background-position: center;">
-            <div class="hero-content">
-                <h1 style="color: white; text-shadow: 0 10px 30px rgba(0,0,0,0.8);">
-                    PRECISION <span>COMPONENTS.</span>
-                </h1>
-                <p style="color: var(--text-silver); font-size: 1.2rem; margin-bottom: 40px; max-width: 500px; font-weight: 500;">
+        <section class="hero hero-home" data-aos="fade-up">
+            <div class="hero-content" data-aos="fade-right">
+                <h1>PRECISION <span>COMPONENTS.</span></h1>
+                <p class="hero-copy">
                     Industrial-grade electronics, high-torque motors, and premium power systems for professional engineers.
                 </p>
-                <div style="display: flex; gap: 20px;">
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="150">
                     <a href="pages/products.html" class="btn btn-primary">Start Shopping</a>
-                    <a href="pages/products.html?cat=Motors" class="btn btn-outline">Explore Motors</a>
+                    <a href="pages/products.html?cat=Development%20Boards" class="btn btn-outline">Explore Boards</a>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl" data-aos="fade-up" data-aos-delay="250">
+                    <div class="rounded-2xl border border-blue-500/20 bg-white/5 p-4 shadow-lg shadow-blue-500/10 backdrop-blur">
+                        <p class="text-3xl font-black text-white">40+</p>
+                        <p class="text-xs uppercase tracking-[0.25em] text-blue-400">Products</p>
+                    </div>
+                    <div class="rounded-2xl border border-blue-500/20 bg-white/5 p-4 shadow-lg shadow-blue-500/10 backdrop-blur">
+                        <p class="text-3xl font-black text-white">24/7</p>
+                        <p class="text-xs uppercase tracking-[0.25em] text-blue-400">Project Ready</p>
+                    </div>
+                    <div class="rounded-2xl border border-blue-500/20 bg-white/5 p-4 shadow-lg shadow-blue-500/10 backdrop-blur">
+                        <p class="text-3xl font-black text-white">100%</p>
+                        <p class="text-xs uppercase tracking-[0.25em] text-blue-400">Student Friendly</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Categories -->
-        <section style="margin-bottom: 80px;">
-            <h2 style="font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 40px; text-transform: uppercase;">
-                Shop By <span style="color: var(--accent);">Category</span>
-            </h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-                <div class="product-card" style="padding: 30px; text-align: left; background: linear-gradient(135deg, #161616 0%, #0b0b0b 100%);">
-                    <span style="font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">POWER</span>
-                    <h3 style="font-size: 1.5rem; margin: 10px 0;">Batteries & Chargers</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 25px;">LiPo packs, BMS, and high-speed balancing chargers.</p>
-                    <a href="pages/products.html?cat=Batteries" class="btn btn-outline" style="width: fit-content; padding: 8px 20px;">Browse</a>
-                </div>
-                <div class="product-card" style="padding: 30px; text-align: left; background: linear-gradient(135deg, #161616 0%, #0b0b0b 100%);">
-                    <span style="font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">DRIVE</span>
-                    <h3 style="font-size: 1.5rem; margin: 10px 0;">Motors & Escs</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 25px;">Brushless motors, steppers, and precision drivers.</p>
-                    <a href="pages/products.html?cat=Motors" class="btn btn-outline" style="width: fit-content; padding: 8px 20px;">Browse</a>
-                </div>
-                <div class="product-card" style="padding: 30px; text-align: left; background: linear-gradient(135deg, #161616 0%, #0b0b0b 100%);">
-                    <span style="font-size: 0.7rem; color: var(--accent); font-weight: 900; letter-spacing: 2px;">FABRICATION</span>
-                    <h3 style="font-size: 1.5rem; margin: 10px 0;">3D Printer Parts</h3>
-                    <p style="color: var(--text-muted); margin-bottom: 25px;">Extruders, silent boards, and precision filaments.</p>
-                    <a href="pages/products.html?cat=3D Printing" class="btn btn-outline" style="width: fit-content; padding: 8px 20px;">Browse</a>
-                </div>
+
+        <section class="section-spaced" data-aos="fade-up">
+            <h2 class="section-heading">Shop By <span>Category</span></h2>
+            <div class="category-grid">
+                <article class="product-card category-card" data-aos="zoom-in">
+                    <span class="category-tag">POWER</span>
+                    <h3>Batteries & Chargers</h3>
+                    <p>LiPo packs, cells, holders, charging modules, and power regulation hardware.</p>
+                    <a href="pages/products.html?cat=Batteries" class="btn btn-outline btn-compact">Browse</a>
+                </article>
+                <article class="product-card category-card" data-aos="zoom-in">
+                    <span class="category-tag">CONTROL</span>
+                    <h3>Microcontrollers</h3>
+                    <p>ESP32, Arduino, STM32, Raspberry Pi, and boards for embedded systems.</p>
+                    <a href="pages/products.html?cat=Microcontrollers" class="btn btn-outline btn-compact">Browse</a>
+                </article>
+                <article class="product-card category-card" data-aos="zoom-in">
+                    <span class="category-tag">SENSING</span>
+                    <h3>Sensors & Modules</h3>
+                    <p>Distance, motion, temperature, gas, light, and interface modules.</p>
+                    <a href="pages/products.html?cat=Sensors" class="btn btn-outline btn-compact">Browse</a>
+                </article>
             </div>
         </section>
 
-        <!-- Trending Grids -->
-        <section>
-            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
-                <h2 style="font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; text-transform: uppercase;">
-                    Best <span style="color: var(--accent);">Sellers</span>
-                </h2>
-                <a href="pages/products.html" style="color: var(--accent); font-weight: 700; font-size: 0.9rem;">View All Products →</a>
+        <section data-aos="fade-up">
+            <div class="section-top">
+                <h2 class="section-heading">Best <span>Sellers</span></h2>
+                <a href="pages/products.html" class="view-link">View All Products →</a>
             </div>
-            <div id="featured-products" class="product-grid">
-                <!-- Data loaded via JS -->
+            <div id="featured-products" class="product-grid" data-aos="fade-up" data-aos-delay="150">
+                <!-- Loaded by js/app.js -->
             </div>
         </section>
     </main>
+
+    <section class="max-w-6xl mx-auto px-6 py-14 mb-4" data-aos="fade-up">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="rounded-3xl border border-blue-500/20 bg-gradient-to-br from-blue-600/20 to-white/5 p-6 shadow-xl shadow-blue-900/20">
+                <span class="text-xs font-bold uppercase tracking-[0.3em] text-blue-400">Premium Store</span>
+                <h3 class="mt-3 text-2xl font-black text-white">Robotics-grade parts</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-400">Boards, modules, power systems, and sensors arranged for fast project building.</p>
+            </div>
+            <div class="rounded-3xl border border-blue-500/20 bg-white/5 p-6 shadow-xl shadow-blue-900/20">
+                <span class="text-xs font-bold uppercase tracking-[0.3em] text-blue-400">Secure Projects</span>
+                <h3 class="mt-3 text-2xl font-black text-white">Reliable checkout flow</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-400">The cart uses a stronger storage fallback so added items stay visible during testing.</p>
+            </div>
+            <div class="rounded-3xl border border-blue-500/20 bg-white/5 p-6 shadow-xl shadow-blue-900/20">
+                <span class="text-xs font-bold uppercase tracking-[0.3em] text-blue-400">Curated Components</span>
+                <h3 class="mt-3 text-2xl font-black text-white">Clean categories</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-400">Microcontrollers, development boards, sensors, components, and batteries in one place.</p>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="logo">VELOCE <span>LABS</span></div>
@@ -97,40 +129,9 @@
             <a href="#">Shipping</a>
             <a href="#">Privacy</a>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.8rem;">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+        <p class="footer-copy">&copy; 2026 VELOCE LABS Amritapuri ENGINEERED FOR PRECISION.</p>
     </footer>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/app.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const featuredGrid = document.getElementById('featured-products');
-            featuredGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); font-weight: 900; letter-spacing: 2px;">SYNCING INVENTORY...</div>';
-            
-            const data = await loadProducts('./');
-            
-            if (!data || data.length === 0) {
-                featuredGrid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1/-1; text-align: center; padding: 40px;">No products found. Please check products.json.</p>';
-                return;
-            }
-
-            featuredGrid.innerHTML = ''; // Clear loading state
-            data.slice(0, 4).forEach(product => {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.innerHTML = `
-                    <a href="pages/product-detail.html?id=${product.id}">
-                        <img src="${fixImagePath(product.image)}" alt="${product.name}">
-                    </a>
-                    <div class="product-info">
-                        <span class="product-category">${product.category}</span>
-                        <a href="pages/product-detail.html?id=${product.id}" style="display: block; font-size: 1.3rem; font-weight: 900; margin-bottom: 10px;">${product.name}</a>
-                        <div class="product-price">${product.price.toFixed(0)}</div>
-                        <button class="btn btn-primary" onclick="addToCart(${product.id})" style="width: 100%;">Add to Cart</button>
-                    </div>
-                `;
-                featuredGrid.appendChild(card);
-            });
-        });
-    </script>
 </body>
 </html>
