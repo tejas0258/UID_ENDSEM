@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | VELOCE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* ── CHECKOUT PAGE OVERRIDES ── */
+        .checkout-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 32px;
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .checkout-wrapper { grid-template-columns: 1fr; }
+            .order-summary-panel { order: -1; }
+        }
+
+        /* ── PAGE TITLE ── */
+        .checkout-page-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            padding: 48px 24px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .checkout-page-title span { color: var(--accent); }
+
+        /* ── SECTION CARD ── */
+        .form-section {
+            background: var(--bg-surface);
+            border: 1px solid rgba(0,81,186,0.2);
+            border-radius: 16px;
+            padding: 28px 28px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(0,81,186,0.3);
+        }
+
+        /* ── FORM FIELDS ── */
+        .field-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .field-grid.cols-1 { grid-template-columns: 1fr; }
+        .field-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+        @media (max-width: 600px) {
+            .field-grid, .field-grid.cols-3 { grid-template-columns: 1fr; }
+        }
+
+        .field-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .field-wrap.full { grid-column: 1 / -1; }
+
+        .field-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+        .field-input {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
+            width: 100%;
+        }
+        .field-input::placeholder { color: rgba(255,255,255,0.25); }
+        .field-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0,81,186,0.15);
+            background: rgba(0,81,186,0.05);
+        }
+        .field-input.error {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(255,68,68,0.15);
+        }
+        .field-input.valid {
+            border-color: #00c851;
+            box-shadow: 0 0 0 3px rgba(0,200,81,0.1);
+        }
+        .field-error {
+            font-size: 0.65rem;
+            color: var(--danger);
+            letter-spacing: 0.1em;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+        .field-error.show { display: flex; }
+        select.field-input option { background: #161616; color: #fff; }
+
+        /* ── PAYMENT TABS ── */
+        .pay-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .pay-tab {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 14px 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .pay-tab:hover { border-color: rgba(0,81,186,0.4); color: var(--text-main); }
+        .pay-tab.active {
+            border-color: var(--accent);
+            background: rgba(0,81,186,0.12);
+            color: var(--text-main);
+            box-shadow: 0 0 20px rgba(0,81,186,0.2);
+        }
+        .pay-tab-icon { font-size: 1.4rem; }
+
+        /* ── UPI OPTIONS ── */
+        .upi-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .upi-card {
+            border: 1.5px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 16px 10px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.25s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .upi-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+        .upi-card.selected {
+            border-color: var(--accent);
+            background: rgba(0,81,186,0.1);
+            box-shadow: 0 0 16px rgba(0,81,186,0.25);
+        }
+        .upi-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+        .upi-logo.phonepe { background: linear-gradient(135deg, #5f259f, #8b35d6); }
+        .upi-logo.gpay { background: linear-gradient(135deg, #1a73e8, #34a853); }
+        .upi-logo.rupay { background: linear-gradient(135deg, #FF6200, #FF9500); }
+        .upi-name { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+        .upi-card.selected .upi-name { color: var(--text-main); }
+
+        .upi-id-wrap { margin-top: 4px; }
+
+        /* ── CARD FORM ── */
+        .card-visual {
+            background: linear-gradient(135deg, #0a1628 0%, #051025 50%, #0d1f3c 100%);
+            border: 1px solid rgba(0,81,186,0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            min-height: 160px;
+        }
+        .card-visual::before {
+            content: '';
+            position: absolute;
+            top: -30px; right: -30px;
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            background: rgba(0,81,186,0.2);
+        }
+        .card-visual::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: -20px;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            background: rgba(0,81,186,0.1);
+        }
+        .card-chip {
+            width: 36px; height: 28px;
+            background: linear-gradient(135deg, #d4af37, #f5d169);
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .card-number-display {
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            color: rgba(255,255,255,0.8);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 16px;
+        }
+        .card-meta { display: flex; justify-content: space-between; align-items: flex-end; }
+        .card-holder-display { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+        .card-holder-name { font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 600; letter-spacing: 0.1em; margin-top: 2px; text-transform: uppercase; }
+        .card-expiry-display { text-align: right; }
+
+        /* ── COD ── */
+        .cod-block {
+            text-align: center;
+            padding: 32px;
+        }
+        .cod-icon { font-size: 4rem; margin-bottom: 16px; }
+        .cod-title { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+        .cod-desc { font-size: 0.85rem; color: var(--text-muted); max-width: 280px; margin: 0 auto; }
+
+        /* ── ORDER SUMMARY ── */
+        .order-summary-panel {
+            background: var(--bg-surface);
+            border: 1px solid rgba(0,81,186,0.2);
+            border-radius: 16px;
+            padding: 24px;
+            position: sticky;
+            top: 90px;
+        }
+        .summary-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        .summary-items { margin-bottom: 20px; }
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .summary-item:last-child { border-bottom: none; }
+        .item-qty-badge {
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 900;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .item-name { font-size: 0.8rem; color: var(--text-silver); flex: 1; }
+        .item-price { font-size: 0.85rem; font-weight: 700; }
+
+        .summary-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 16px 0; }
+        .summary-row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 4px 0; color: var(--text-muted); }
+        .summary-row.total { color: var(--text-main); font-weight: 900; font-size: 1.1rem; padding-top: 8px; }
+        .summary-row .free { color: #00c851; font-weight: 700; }
+        .summary-row .total-val { color: var(--accent); }
+
+        /* ── PLACE ORDER BUTTON ── */
+        .place-order-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .place-order-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .place-order-btn:hover {
+            box-shadow: 0 0 30px rgba(0,81,186,0.5);
+            transform: translateY(-1px);
+        }
+        .place-order-btn:hover::after { opacity: 1; }
+        .place-order-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .place-order-btn.loading { pointer-events: none; }
+
+        .secure-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            margin-top: 12px;
+            text-transform: uppercase;
+        }
+
+        /* ── SUCCESS OVERLAY ── */
+        .success-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+        }
+        .success-overlay.show { display: flex; }
+        .success-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(0,81,186,0.4);
+            border-radius: 24px;
+            padding: 56px 48px;
+            text-align: center;
+            max-width: 440px;
+            width: 90%;
+            animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes successPop {
+            from { transform: scale(0.7) translateY(30px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+        .success-icon {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, rgba(0,200,81,0.2), rgba(0,81,186,0.2));
+            border: 2px solid #00c851;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 24px;
+            animation: pulseRing 2s infinite;
+        }
+        @keyframes pulseRing {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,200,81,0.4); }
+            50% { box-shadow: 0 0 0 16px rgba(0,200,81,0); }
+        }
+        .success-title { font-size: 1.6rem; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; margin-bottom: 8px; }
+        .success-title span { color: var(--accent); }
+        .success-sub { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 8px; }
+        .order-id { font-size: 0.7rem; letter-spacing: 0.2em; color: var(--accent); font-weight: 700; margin-bottom: 28px; }
+        .success-home-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .success-home-btn:hover { box-shadow: 0 0 20px rgba(0,81,186,0.5); transform: translateY(-2px); }
+
+        /* ── PROGRESS STEPS ── */
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            padding: 0 24px 32px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+        .step-circle {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            transition: all 0.4s;
+        }
+        .step.done .step-circle { background: #00c851; border-color: #00c851; color: #fff; }
+        .step.active .step-circle { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 0 12px rgba(0,81,186,0.5); }
+        .step-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+        .step.active .step-label, .step.done .step-label { color: var(--text-main); }
+        .step-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 20px; }
+        .step-line.done { background: #00c851; }
+    </style>
+</head>
+<body data-page="checkout" data-products-base="../">
+
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">VELOCE <span>LABS</span></a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="products.html">Shop</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="theme-switch">
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle-input">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <a href="cart.html" class="cart-icon">🛒 <span class="cart-count">0</span></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="checkout-page-title" data-aos="fade-right">SECURE <span>CHECKOUT</span></h1>
+
+        <!-- Progress -->
+        <div class="progress-bar" data-aos="fade-up">
+            <div class="step done">
+                <div class="step-circle">✓</div>
+                <div class="step-label">Cart</div>
+            </div>
+            <div class="step-line done"></div>
+            <div class="step active">
+                <div class="step-circle">2</div>
+                <div class="step-label">Details</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <div class="step-circle">3</div>
+                <div class="step-label">Payment</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+                <div class="step-circle">4</div>
+                <div class="step-label">Confirm</div>
+            </div>
+        </div>
+
+        <div class="checkout-wrapper">
+            <!-- LEFT: FORM -->
+            <div class="checkout-form-col">
+
+                <!-- CONTACT -->
+                <div class="form-section" data-aos="fade-up">
+                    <div class="section-label">Contact Information</div>
+                    <div class="field-grid cols-1">
+                        <div class="field-wrap">
+                            <label class="field-label" for="email">Email Address</label>
+                            <input class="field-input" type="email" id="email" placeholder="operator@veloce.systems" autocomplete="email">
+                            <span class="field-error" id="email-error">⚠ Valid email address required</span>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="field-label" for="phone">Phone Number</label>
+                            <input class="field-input" type="tel" id="phone" placeholder="+91 98765 43210" autocomplete="tel" maxlength="15">
+                            <span class="field-error" id="phone-error">⚠ Valid 10-digit phone number required</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DELIVERY -->
+                <div class="form-section" data-aos="fade-up" data-aos-delay="50">
+                    <div class="section-label">Delivery Address</div>
+                    <div class="field-grid">
+                        <div class="field-wrap">
+                            <label class="field-label" for="fname">First Name</label>
+                            <input class="field-input" type="text" id="fname" placeholder="Arjun" autocomplete="given-name">
+                            <span class="field-error" id="fname-error">⚠ First name required</span>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="field-label" for="lname">Last Name</label>
+                            <input class="field-input" type="text" id="lname" placeholder="Sharma" autocomplete="family-name">
+                            <span class="field-error" id="lname-error">⚠ Last name required</span>
+                        </div>
+                        <div class="field-wrap full">
+                            <label class="field-label" for="address1">Address Line 1</label>
+                            <input class="field-input" type="text" id="address1" placeholder="Flat 4B, Tech Park Residency" autocomplete="address-line1">
+                            <span class="field-error" id="address1-error">⚠ Address is required</span>
+                        </div>
+                        <div class="field-wrap full">
+                            <label class="field-label" for="address2">Address Line 2 <span style="color:var(--text-muted);font-weight:400">(Optional)</span></label>
+                            <input class="field-input" type="text" id="address2" placeholder="Near MG Road, Sector 5" autocomplete="address-line2">
+                        </div>
+                        <div class="field-wrap">
+                            <label class="field-label" for="city">City</label>
+                            <input class="field-input" type="text" id="city" placeholder="Bengaluru" autocomplete="address-level2">
+                            <span class="field-error" id="city-error">⚠ City is required</span>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="field-label" for="state">State</label>
+                            <select class="field-input" id="state" autocomplete="address-level1">
+                                <option value="">— Select State —</option>
+                                <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                                <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
+                                <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+                                <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+                                <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+                                <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+                                <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                                <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+                                <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+                                <option>West Bengal</option><option>Delhi</option>
+                            </select>
+                            <span class="field-error" id="state-error">⚠ Please select a state</span>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="field-label" for="pincode">PIN Code</label>
+                            <input class="field-input" type="text" id="pincode" placeholder="560001" maxlength="6" inputmode="numeric">
+                            <span class="field-error" id="pincode-error">⚠ Valid 6-digit PIN code required</span>
+                        </div>
+                        <div class="field-wrap">
+                            <label class="field-label" for="country">Country</label>
+                            <input class="field-input" type="text" id="country" value="India" readonly style="opacity:0.6;cursor:default;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PAYMENT -->
+                <div class="form-section" data-aos="fade-up" data-aos-delay="100">
+                    <div class="section-label">Payment Method</div>
+
+                    <div class="pay-tabs">
+                        <button class="pay-tab active" data-pay="upi" type="button">
+                            <span class="pay-tab-icon">📲</span>UPI
+                        </button>
+                        <button class="pay-tab" data-pay="card" type="button">
+                            <span class="pay-tab-icon">💳</span>Card
+                        </button>
+                        <button class="pay-tab" data-pay="cod" type="button">
+                            <span class="pay-tab-icon">💵</span>Cash on Delivery
+                        </button>
+                    </div>
+
+                    <!-- UPI PANEL -->
+                    <div id="pay-upi" class="pay-panel">
+                        <div class="upi-options">
+                            <div class="upi-card selected" data-upi="phonepe">
+                                <div class="upi-logo phonepe">☎</div>
+                                <div class="upi-name">PhonePe</div>
+                            </div>
+                            <div class="upi-card" data-upi="gpay">
+                                <div class="upi-logo gpay">G</div>
+                                <div class="upi-name">Google Pay</div>
+                            </div>
+                            <div class="upi-card" data-upi="rupay">
+                                <div class="upi-logo rupay">R</div>
+                                <div class="upi-name">RuPay</div>
+                            </div>
+                        </div>
+                        <div class="upi-id-wrap field-wrap">
+                            <label class="field-label" for="upi-id">UPI ID</label>
+                            <input class="field-input" type="text" id="upi-id" placeholder="yourname@ybl" autocomplete="off">
+                            <span class="field-error" id="upi-error">⚠ Enter a valid UPI ID (e.g. name@ybl)</span>
+                        </div>
+                    </div>
+
+                    <!-- CARD PANEL -->
+                    <div id="pay-card" class="pay-panel" style="display:none;">
+                        <!-- Card Visual -->
+                        <div class="card-visual">
+                            <div class="card-chip"></div>
+                            <div class="card-number-display" id="card-display-num">•••• •••• •••• ••••</div>
+                            <div class="card-meta">
+                                <div>
+                                    <div class="card-holder-display">Card Holder</div>
+                                    <div class="card-holder-name" id="card-display-name">YOUR NAME</div>
+                                </div>
+                                <div class="card-expiry-display">
+                                    <div class="card-holder-display">Expires</div>
+                                    <div class="card-holder-name" id="card-display-exp">MM/YY</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field-grid cols-1" style="margin-bottom:14px;">
+                            <div class="field-wrap">
+                                <label class="field-label" for="card-name">Name on Card</label>
+                                <input class="field-input" type="text" id="card-name" placeholder="ARJUN SHARMA" autocomplete="cc-name" style="text-transform:uppercase;">
+                                <span class="field-error" id="card-name-error">⚠ Cardholder name required</span>
+                            </div>
+                        </div>
+                        <div class="field-grid cols-1" style="margin-bottom:14px;">
+                            <div class="field-wrap">
+                                <label class="field-label" for="card-number">Card Number</label>
+                                <input class="field-input" type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" autocomplete="cc-number">
+                                <span class="field-error" id="card-number-error">⚠ Valid 16-digit card number required</span>
+                            </div>
+                        </div>
+                        <div class="field-grid">
+                            <div class="field-wrap">
+                                <label class="field-label" for="card-expiry">Expiry (MM/YY)</label>
+                                <input class="field-input" type="text" id="card-expiry" placeholder="08/27" maxlength="5" inputmode="numeric" autocomplete="cc-exp">
+                                <span class="field-error" id="card-expiry-error">⚠ Valid expiry date required</span>
+                            </div>
+                            <div class="field-wrap">
+                                <label class="field-label" for="card-cvv">CVV</label>
+                                <input class="field-input" type="password" id="card-cvv" placeholder="•••" maxlength="4" inputmode="numeric" autocomplete="cc-csc">
+                                <span class="field-error" id="card-cvv-error">⚠ 3 or 4 digit CVV required</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COD PANEL -->
+                    <div id="pay-cod" class="pay-panel" style="display:none;">
+                        <div class="cod-block">
+                            <div class="cod-icon">💵</div>
+                            <div class="cod-title">Cash on Delivery</div>
+                            <div class="cod-desc">Pay with cash when your order arrives. No transaction fees. Available across India.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /checkout-form-col -->
+
+            <!-- RIGHT: ORDER SUMMARY -->
+            <div class="order-summary-panel" data-aos="fade-left">
+                <div class="summary-title">Order Summary</div>
+                <div class="summary-items" id="summary-items">
+                    <div style="color:var(--text-muted);font-size:0.8rem;">Loading cart…</div>
+                </div>
+                <hr class="summary-divider">
+                <div class="summary-row"><span>Subtotal</span><span id="summary-subtotal">INR 0.00</span></div>
+                <div class="summary-row"><span>Shipping</span><span class="free">FREE</span></div>
+                <div class="summary-row"><span>Tax (GST 18%)</span><span id="summary-tax">INR 0.00</span></div>
+                <hr class="summary-divider">
+                <div class="summary-row total"><span>Total</span><span class="total-val" id="summary-total">INR 0.00</span></div>
+
+                <button class="place-order-btn" id="place-order-btn" type="button">
+                    🔒 &nbsp;Place Order
+                </button>
+                <div class="secure-note">🛡 SSL Encrypted &nbsp;|&nbsp; Secure Payment</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SUCCESS OVERLAY -->
+    <div class="success-overlay" id="success-overlay">
+        <div class="success-card">
+            <div class="success-icon">✓</div>
+            <div class="success-title">Order <span>Confirmed</span></div>
+            <div class="success-sub">Your package is entering the dispatch queue.</div>
+            <div class="order-id" id="order-id-display">ORDER #VL-000000</div>
+            <a href="../index.html" class="success-home-btn">Return to Base</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="logo">VELOCE <span>LABS</span></div>
+        <p class="footer-copy">&copy; 2026 VELOCE LABS GMBH. ENGINEERED FOR PRECISION.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+    /* ───────── CHECKOUT PAGE LOGIC ───────── */
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // ─── Load cart into summary ───
+        function loadSummary() {
+            const saved = localStorage.getItem('veloce_cart');
+            const cartItems = saved ? JSON.parse(saved) : [];
+            const itemsEl = document.getElementById('summary-items');
+            if (!cartItems.length) {
+                itemsEl.innerHTML = '<div style="color:var(--text-muted);font-size:0.8rem;">Your cart is empty.</div>';
+                document.getElementById('summary-subtotal').textContent = 'INR 0.00';
+                document.getElementById('summary-tax').textContent = 'INR 0.00';
+                document.getElementById('summary-total').textContent = 'INR 0.00';
+                return;
+            }
+            let subtotal = 0;
+            itemsEl.innerHTML = cartItems.map(item => {
+                const lineTotal = item.price * item.quantity;
+                subtotal += lineTotal;
+                return `
+                <div class="summary-item">
+                    <div class="item-qty-badge">${item.quantity}</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-price">INR ${lineTotal.toFixed(2)}</div>
+                </div>`;
+            }).join('');
+            const tax = subtotal * 0.18;
+            const total = subtotal + tax;
+            document.getElementById('summary-subtotal').textContent = 'INR ' + subtotal.toFixed(2);
+            document.getElementById('summary-tax').textContent = 'INR ' + tax.toFixed(2);
+            document.getElementById('summary-total').textContent = 'INR ' + total.toFixed(2);
+        }
+        loadSummary();
+
+        // ─── Payment tabs ───
+        let activePayMethod = 'upi';
+        document.querySelectorAll('.pay-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                activePayMethod = tab.dataset.pay;
+                document.querySelectorAll('.pay-panel').forEach(p => p.style.display = 'none');
+                document.getElementById('pay-' + activePayMethod).style.display = '';
+            });
+        });
+
+        // ─── UPI card selection ───
+        document.querySelectorAll('.upi-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.upi-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+        });
+
+        // ─── Card visual live update ───
+        const cardNum = document.getElementById('card-number');
+        const cardName = document.getElementById('card-name');
+        const cardExp = document.getElementById('card-expiry');
+
+        cardNum && cardNum.addEventListener('input', e => {
+            let v = e.target.value.replace(/\D/g,'').slice(0,16);
+            e.target.value = v.replace(/(.{4})/g,'$1 ').trim();
+            const display = v.padEnd(16,'•').replace(/(.{4})/g,'$1 ').trim();
+            document.getElementById('card-display-num').textContent = display;
+        });
+        cardName && cardName.addEventListener('input', e => {
+            document.getElementById('card-display-name').textContent = e.target.value.toUpperCase() || 'YOUR NAME';
+        });
+        cardExp && cardExp.addEventListener('input', e => {
+            let v = e.target.value.replace(/\D/g,'');
+            if (v.length > 2) v = v.slice(0,2) + '/' + v.slice(2,4);
+            e.target.value = v;
+            document.getElementById('card-display-exp').textContent = v || 'MM/YY';
+        });
+
+        // ─── Validation helpers ───
+        function showError(id, msg) {
+            const el = document.getElementById(id);
+            const input = document.getElementById(id.replace('-error',''));
+            if (el) { el.textContent = '⚠ ' + (msg||el.textContent.replace('⚠ ','')); el.classList.add('show'); }
+            if (input) { input.classList.add('error'); input.classList.remove('valid'); }
+        }
+        function clearError(id) {
+            const el = document.getElementById(id);
+            const input = document.getElementById(id.replace('-error',''));
+            if (el) el.classList.remove('show');
+            if (input) { input.classList.remove('error'); input.classList.add('valid'); }
+        }
+        function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+        function validatePhone(v) { return /^[6-9]\d{9}$/.test(v.replace(/\D/g,'')); }
+        function validatePin(v) { return /^\d{6}$/.test(v); }
+        function validateUPI(v) { return /^[\w.-]+@[\w.-]+$/.test(v); }
+        function validateCardNum(v) { return v.replace(/\s/g,'').length === 16; }
+        function validateExpiry(v) {
+            const m = v.match(/^(\d{2})\/(\d{2})$/);
+            if (!m) return false;
+            const now = new Date(), mon = parseInt(m[1]), yr = 2000 + parseInt(m[2]);
+            return mon >= 1 && mon <= 12 && (yr > now.getFullYear() || (yr === now.getFullYear() && mon >= now.getMonth()+1));
+        }
+        function validateCVV(v) { return /^\d{3,4}$/.test(v); }
+
+        // live validation on blur
+        function addBlur(fieldId, errorId, fn) {
+            const el = document.getElementById(fieldId);
+            if (!el) return;
+            el.addEventListener('blur', () => {
+                if (fn(el.value.trim())) clearError(errorId); else showError(errorId);
+            });
+            el.addEventListener('input', () => {
+                if (el.classList.contains('error') && fn(el.value.trim())) clearError(errorId);
+            });
+        }
+        addBlur('email','email-error', validateEmail);
+        addBlur('phone','phone-error', validatePhone);
+        addBlur('fname','fname-error', v => v.length >= 2);
+        addBlur('lname','lname-error', v => v.length >= 2);
+        addBlur('address1','address1-error', v => v.length >= 5);
+        addBlur('city','city-error', v => v.length >= 2);
+        addBlur('state','state-error', v => v !== '');
+        addBlur('pincode','pincode-error', validatePin);
+        addBlur('upi-id','upi-error', validateUPI);
+        addBlur('card-name','card-name-error', v => v.length >= 3);
+        addBlur('card-number','card-number-error', validateCardNum);
+        addBlur('card-expiry','card-expiry-error', validateExpiry);
+        addBlur('card-cvv','card-cvv-error', validateCVV);
+
+        // ─── Place order ───
+        document.getElementById('place-order-btn').addEventListener('click', () => {
+            let valid = true;
+
+            // Contact
+            const emailEl = document.getElementById('email');
+            if (!validateEmail(emailEl.value.trim())) { showError('email-error'); valid = false; } else clearError('email-error');
+            const phoneEl = document.getElementById('phone');
+            if (!validatePhone(phoneEl.value.trim())) { showError('phone-error'); valid = false; } else clearError('phone-error');
+
+            // Address
+            const fnEl = document.getElementById('fname');
+            if (!fnEl.value.trim() || fnEl.value.trim().length < 2) { showError('fname-error'); valid = false; } else clearError('fname-error');
+            const lnEl = document.getElementById('lname');
+            if (!lnEl.value.trim() || lnEl.value.trim().length < 2) { showError('lname-error'); valid = false; } else clearError('lname-error');
+            const adEl = document.getElementById('address1');
+            if (!adEl.value.trim() || adEl.value.trim().length < 5) { showError('address1-error'); valid = false; } else clearError('address1-error');
+            const cityEl = document.getElementById('city');
+            if (!cityEl.value.trim()) { showError('city-error'); valid = false; } else clearError('city-error');
+            const stateEl = document.getElementById('state');
+            if (!stateEl.value) { showError('state-error'); valid = false; } else clearError('state-error');
+            const pinEl = document.getElementById('pincode');
+            if (!validatePin(pinEl.value.trim())) { showError('pincode-error'); valid = false; } else clearError('pincode-error');
+
+            // Payment
+            if (activePayMethod === 'upi') {
+                const upiEl = document.getElementById('upi-id');
+                if (!validateUPI(upiEl.value.trim())) { showError('upi-error'); valid = false; } else clearError('upi-error');
+            } else if (activePayMethod === 'card') {
+                const cnEl = document.getElementById('card-name');
+                if (!cnEl.value.trim() || cnEl.value.trim().length < 3) { showError('card-name-error'); valid = false; } else clearError('card-name-error');
+                const cnumEl = document.getElementById('card-number');
+                if (!validateCardNum(cnumEl.value)) { showError('card-number-error'); valid = false; } else clearError('card-number-error');
+                const cexpEl = document.getElementById('card-expiry');
+                if (!validateExpiry(cexpEl.value)) { showError('card-expiry-error'); valid = false; } else clearError('card-expiry-error');
+                const ccvvEl = document.getElementById('card-cvv');
+                if (!validateCVV(ccvvEl.value)) { showError('card-cvv-error'); valid = false; } else clearError('card-cvv-error');
+            }
+            // COD has no extra validation
+
+            if (!valid) {
+                // Scroll to first error
+                const firstErr = document.querySelector('.field-input.error');
+                if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            // Animate button
+            const btn = document.getElementById('place-order-btn');
+            btn.textContent = '⚙ Processing…';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Clear cart
+                localStorage.removeItem('veloce_cart');
+                // Show success
+                const orderId = 'VL-' + Math.random().toString(36).substr(2,6).toUpperCase();
+                document.getElementById('order-id-display').textContent = 'ORDER #' + orderId;
+                document.getElementById('success-overlay').classList.add('show');
+            }, 1800);
+        });
+    });
+    </script>
+</body>
+</html>
