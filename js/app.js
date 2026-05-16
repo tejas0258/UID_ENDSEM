@@ -1303,11 +1303,9 @@ function renderCart() {
 function checkout() {
     showToast('SYNC INITIATED. REDIRECTING TO PAYMENT PROTOCOL.');
     setTimeout(() => {
-        cart = [];
-        clearSavedCart();
-        updateCartUI();
-        window.location.href = '../index.html';
-    }, 1500);
+        const inPages = window.location.pathname.includes('/pages/');
+        window.location.href = inPages ? 'checkout.html' : 'pages/checkout.html';
+    }, 900);
 }
 
 function initCartPage() {
