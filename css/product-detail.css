@@ -1,0 +1,121 @@
+/*
+   VELOCE LABS - Product Detail Page Styles
+   Detail layout, image, tabs, and specs table.
+*/
+
+.detail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 40px;
+    padding: 50px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 40px;
+}
+
+.detail-img img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.detail-title {
+    margin: 10px 0;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.detail-maker {
+    margin-bottom: 20px;
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.product-price-large {
+    font-size: 2.5rem;
+}
+
+.detail-description {
+    margin: 30px 0;
+    color: var(--text-silver);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.detail-button {
+    padding: 18px 50px;
+    font-size: 1rem;
+}
+
+/* Tabs */
+.tabs {
+    margin-top: 60px;
+}
+
+.tab-headers {
+    display: flex;
+    gap: 40px;
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+    padding-bottom: 15px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.tab-btn.active {
+    color: var(--accent);
+    border-bottom: 3px solid var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow);
+}
+
+.tab-content {
+    padding: 40px 0;
+    color: var(--text-silver);
+}
+
+.desc-text {
+    font-size: 1.2rem;
+    line-height: 2;
+}
+
+/* Specs table */
+.specs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.specs-table tr {
+    border-bottom: 1px solid var(--border);
+}
+
+.specs-table td {
+    padding: 15px 0;
+}
+
+.specs-label {
+    width: 250px;
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.specs-empty {
+    padding: 40px;
+    color: var(--text-muted);
+    text-align: center;
+}
