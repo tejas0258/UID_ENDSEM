@@ -22,3 +22,13 @@ Drop your image in `assets/products/` and add an entry to the products array in 
 
 ## Stack
 HTML · CSS · Vanilla JS · Tailwind CSS (CDN) · AOS.js
+
+## Team & Contributions
+
+| Member | Pages |
+|--------|-------|
+| **Tejas Shrivastava** | Home, Products, Product Detail |
+| **Ayush Kushwaha** | Cart, Checkout, FAQ |
+| **Varun Lokare** | Login, Sign Up, Profile, About |
+
+CSS and JS — contributed to by all three members.
