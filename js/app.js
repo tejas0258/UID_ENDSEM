@@ -1,8 +1,4 @@
 /**
- * VELOCE LABS - App Entry Point
- * Bootstraps the app: wires global click delegation, page routing,
- * and shared init (cart, theme, AOS, auth UI).
- *
  * Script load order in HTML:
  *   1. ui.js
  *   2. storage.js
@@ -18,7 +14,6 @@
  *  12. app.js               (every page, last)
  */
 
-// ── Global click delegation ───────────────────────────────────────────────────
 
 function handleGlobalClicks(event) {
     // Demo login autofill
