@@ -27,7 +27,7 @@ HTML · CSS · Vanilla JS · Tailwind CSS (CDN) · AOS.js
 | Member | Pages |
 |--------|-------|
 | **Tejas Shrivastava** | Home, Products, Product Detail |
-| **Ayush Kushwaha** | Cart, Checkout, FAQ |
-| **Varun Lokare** | Login, Sign Up, Profile, About |
+| **Ayush Kushwaha** | Login, Cart, Checkout, FAQ |
+| **Varun Lokare** | Sign Up, Profile, About |
 
 CSS and JS — contributed to by all three members.
